@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: pterodactyl-discord-bot
+    runtime: node
+    plan: free          # change to "starter" or higher for always-on
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # ── Secrets: set these in the Render dashboard → Environment tab ──
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: DISCORD_GUILD_ID
+        sync: false          # optional
+      - key: PTERODACTYL_PANEL_URL
+        sync: false
+      - key: PTERODACTYL_API_KEY
+        sync: false
+      - key: PTERODACTYL_CLIENT_API_KEY
+        sync: false          # optional, needed for power actions & live stats
+      - key: OWNER_IDS
+        sync: false          # optional, comma-separated Discord user IDs
+      - key: LICENSE_KEY
+        sync: false
